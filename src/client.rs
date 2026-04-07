@@ -42,9 +42,8 @@ impl GbizClient {
     pub async fn search(&self, params: &SearchParams) -> Result<Value> {
         let url = format!("{}/v2/hojin", self.base_url);
 
-        let encoded_name = urlencoding::encode(&params.name);
         let mut query: Vec<(&str, String)> = vec![
-            ("name", encoded_name.into_owned()),
+            ("name", params.name.clone()),
             ("limit", params.limit.to_string()),
             ("page", params.page.to_string()),
         ];
